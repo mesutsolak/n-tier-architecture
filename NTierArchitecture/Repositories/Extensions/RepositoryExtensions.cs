@@ -4,7 +4,7 @@ public static class RepositoryExtensions
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.AddDbContext<AppDbContext>(options =>
+        services.AddDbContext<AppDbContext>(options =>
         {
             var connectionStrings = configuration.GetSection(ConnectionStringOption.Key).Get<ConnectionStringOption>();
 
@@ -13,5 +13,10 @@ public static class RepositoryExtensions
                 sqlServerOptionsAction.MigrationsAssembly(typeof(RepositoryAssembly).Assembly.FullName);
             });
         });
+
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        return services;
     }
 }
