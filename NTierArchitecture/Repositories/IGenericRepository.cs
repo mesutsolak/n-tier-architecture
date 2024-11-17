@@ -1,14 +1,13 @@
 ﻿using System.Linq.Expressions;
 
-namespace Repositories
+namespace Repositories;
+
+public interface IGenericRepository<T> where T : class
 {
-    public interface IGenericRepository<T> where T : class
-    {
-        IQueryable<T> GetAll();
-        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
-        ValueTask<T?> GetByIdAsync(int id);
-        ValueTask AddAsync(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-    }
+    IQueryable<T> GetAll();
+    IQueryable<T> Where(Expression<Func<T, bool>> predicate);
+    ValueTask<T?> GetByIdAsync(int id);
+    ValueTask AddAsync(T entity);
+    void Update(T entity);
+    void Delete(T entity);
 }

@@ -1,6 +1,4 @@
-﻿using Repositories.Products;
-
-namespace Repositories;
+﻿namespace Repositories;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

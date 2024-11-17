@@ -1,11 +1,10 @@
-﻿namespace Services.Extensions
+﻿namespace Services.Extensions;
+
+public static class ServiceExtensions
 {
-    public static class ServiceExtensions
+    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddScoped<IProductService, ProductService>();
-            return services;
-        }
+        services.AddScoped<IProductService, ProductService>();
+        return services;
     }
 }
