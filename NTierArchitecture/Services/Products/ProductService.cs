@@ -1,11 +1,14 @@
-﻿using Azure.Core;
+﻿namespace Services.Products;
 
-namespace Services.Products;
-
-public class ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork) : IProductService
+public class ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork, IMapper mapper) : IProductService
 {
     public async Task<ServiceResult<CreateProductResponse>> CreateAsync(CreateProductRequest request)
     {
+        var isAnyProduct = await productRepository.Where(x => x.Name.Equals(request.Name)).AnyAsync();
+
+        if (isAnyProduct)
+            return ServiceResult<CreateProductResponse>.Fail("Product found", HttpStatusCode.BadRequest);
+
         var product = new Product()
         {
             Name = request.Name,
@@ -23,7 +26,7 @@ public class ProductService(IProductRepository productRepository, IUnitOfWork un
     {
         var products = await productRepository.GetAll().ToListAsync();
 
-        var productAsDto = products.Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Stock)).ToList();
+        var productAsDto = mapper.Map<List<ProductDto>>(products);
 
         return ServiceResult<List<ProductDto>>.Success(productAsDto);
     }
@@ -35,7 +38,7 @@ public class ProductService(IProductRepository productRepository, IUnitOfWork un
         if (product is null)
             return ServiceResult<ProductDto?>.Fail("Product not found", HttpStatusCode.NotFound);
 
-        var productAsDto = new ProductDto(product!.Id, product.Name, product.Price, product.Stock);
+        var productAsDto = mapper.Map<ProductDto>(product);
 
         return ServiceResult<ProductDto>.Success(productAsDto)!;
     }
@@ -83,9 +86,9 @@ public class ProductService(IProductRepository productRepository, IUnitOfWork un
     {
         var products = await productRepository.GetAll().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
-        var productAsDto = products.Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Stock)).ToList();
+        var productAsDto = mapper.Map<List<ProductDto>>(products);
 
-        return ServiceResult<List<ProductDto>>.Success(productAsDto);
+        return ServiceResult<List<ProductDto>>.Success(productAsDto!);
     }
 
     public async Task<ServiceResult> UpdateStockAsync(UpdateProductStockRequest request)

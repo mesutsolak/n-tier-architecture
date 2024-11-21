@@ -10,7 +10,7 @@ public class CustomBaseController : Controller
         return result.Status switch
         {
             HttpStatusCode.NoContent => NoContent(),
-            HttpStatusCode.Created => Created(result.UrlAsCreated, result.Data),
+            HttpStatusCode.Created => Created(result.UrlAsCreated, result),
             _ => new ObjectResult(result)
             {
                 StatusCode = result.Status.GetHashCode()

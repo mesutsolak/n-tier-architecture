@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace Repositories;
+﻿namespace Repositories;
 
 public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : class
 {
