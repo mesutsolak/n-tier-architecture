@@ -18,13 +18,15 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddProblemDetails();
+
 
 builder.Services.AddRepositories(builder.Configuration)
     .AddServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseExceptionHandler(x => { });
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

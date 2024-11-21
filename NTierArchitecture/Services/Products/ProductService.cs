@@ -59,6 +59,11 @@ public class ProductService(IProductRepository productRepository, IUnitOfWork un
         if (product is null)
             return ServiceResult.Fail("Product not found", HttpStatusCode.NotFound);
 
+        var isProductNameExist = await productRepository.Where(x => x.Name == request.Name && x.Id != product.Id).AnyAsync();
+
+        if (isProductNameExist)
+            return ServiceResult.Fail("ürün ismi veritabanında bulunmaktadır.", HttpStatusCode.BadRequest);
+
         product.Name = request.Name;
         product.Price = request.Price;
         product.Stock = request.Stock;

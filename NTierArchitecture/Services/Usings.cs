@@ -14,6 +14,7 @@ global using Services.ExceptionHandlers;
 global using Services.Products;
 global using Services.Products.Create;
 global using Services.Products.Update;
+global using Services.Products.UpdateStock;
 global using System.Net;
 global using System.Net.Mime;
 global using System.Reflection;
