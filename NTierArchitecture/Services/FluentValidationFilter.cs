@@ -12,6 +12,8 @@ public class FluentValidationFilter : IAsyncActionFilter
             var resultModel = ServiceResult.Fail(errors);
 
             context.Result = new BadRequestObjectResult(resultModel);
+
+            return;
         }
 
         await next();

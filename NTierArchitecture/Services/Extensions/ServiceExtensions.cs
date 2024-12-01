@@ -6,6 +6,8 @@ public static class ServiceExtensions
     {
         services.AddScoped<IProductService, ProductService>();
 
+        services.AddScoped<ICategoryService, CategoryService>();
+
         services.AddFluentValidationAutoValidation();
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
