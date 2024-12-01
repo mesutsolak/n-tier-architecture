@@ -28,17 +28,13 @@ public class CategoryService(ICategoryRepository categoryRepository, IUnitOfWork
 
     public async Task<ServiceResult> UpdateAsync(int id, UpdateCategoryRequest request)
     {
-        var category = await categoryRepository.GetByIdAsync(id);
-
-        if (category is null)
-            return ServiceResult.Fail("güncellenecek kategori bulunamadı.", HttpStatusCode.NotFound);
-
         var isCategoryNameExist = await categoryRepository.Where(x => x.Name == request.Name).AnyAsync();
 
         if (isCategoryNameExist)
             return ServiceResult.Fail("kategori ismi veritabanında bulunmaktadır.", HttpStatusCode.BadRequest);
 
-        category = mapper.Map(request, category);
+        var category = mapper.Map<Category>(request);
+        category.Id = id;
 
         categoryRepository.Update(category);
         await unitOfWork.SaveChangesAsync();
@@ -50,10 +46,8 @@ public class CategoryService(ICategoryRepository categoryRepository, IUnitOfWork
     {
         var category = await categoryRepository.GetByIdAsync(id);
 
-        if (category is null)
-            return ServiceResult.Fail("kategori bulunamadı.", HttpStatusCode.NotFound);
+        categoryRepository.Delete(category!);
 
-        categoryRepository.Delete(category);
         await unitOfWork.SaveChangesAsync();
 
         return ServiceResult.Success(HttpStatusCode.NoContent);
@@ -62,9 +56,6 @@ public class CategoryService(ICategoryRepository categoryRepository, IUnitOfWork
     public async Task<ServiceResult<CategoryDto>> GetByIdAsync(int id)
     {
         var category = await categoryRepository.GetByIdAsync(id);
-
-        if (category is null)
-            return ServiceResult<CategoryDto>.Fail("kategori bulunamadı.", HttpStatusCode.NotFound);
 
         var categoryAsDto = mapper.Map<CategoryDto>(category);
 

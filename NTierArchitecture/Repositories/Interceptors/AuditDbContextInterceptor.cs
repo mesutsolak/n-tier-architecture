@@ -15,6 +15,9 @@ public class AuditDbContextInterceptor : SaveChangesInterceptor
             if (entityEntry.Entity is not IAuditEntity auditEntity)
                 continue;
 
+            if (entityEntry.State is not EntityState.Added or EntityState.Modified)
+                continue;
+
             Behaviors[entityEntry.State](eventData.Context, auditEntity);
 
             #region 1.Way

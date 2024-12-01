@@ -8,6 +8,8 @@ public static class ServiceExtensions
 
         services.AddScoped<ICategoryService, CategoryService>();
 
+        services.AddScoped(typeof(NotFoundFilter<,>));
+
         services.AddFluentValidationAutoValidation();
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

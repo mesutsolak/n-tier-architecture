@@ -1,10 +1,13 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
+global using Repositories.Categories;
 global using Repositories.Extensions;
+global using Repositories.Products;
 global using Services;
 global using Services.Categories;
 global using Services.Categories.Create;
 global using Services.Categories.Update;
 global using Services.Extensions;
+global using Services.Filters;
 global using Services.Products;
 global using Services.Products.Create;
 global using Services.Products.Update;

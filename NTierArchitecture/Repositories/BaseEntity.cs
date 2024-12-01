@@ -1,7 +1,7 @@
-﻿namespace Repositories;
-
-public interface IAuditEntity
+﻿namespace Repositories
 {
-    DateTime Created { get; set; }
-    DateTime? Updated { get; set; }
+    public class BaseEntity<T>
+    {
+        public T Id { get; set; } = default!;
+    }
 }

@@ -1,8 +1,7 @@
 ﻿namespace Repositories.Products;
 
-public class Product : IAuditEntity
+public class Product : BaseEntity<int>, IAuditEntity
 {
-    public int Id { get; set; }
     public string Name { get; set; } = default!;
     public decimal Price { get; set; }
     public int Stock { get; set; }

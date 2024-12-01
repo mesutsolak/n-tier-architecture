@@ -18,14 +18,17 @@ public class ProductsController(IProductService productService) : CustomBaseCont
     public async Task<IActionResult> Create(CreateProductRequest request)
         => CreateActionResult(await productService.CreateAsync(request));
 
+    [ServiceFilter(typeof(NotFoundFilter<Product, int>))]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateProductRequest request)
         => CreateActionResult(await productService.UpdateAsync(id, request));
 
+    [ServiceFilter(typeof(NotFoundFilter<Product, int>))]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
         => CreateActionResult(await productService.DeleteAsync(id));
 
+   
     [HttpPatch("stock")]
     public async Task<IActionResult> UpdateStock(UpdateProductStockRequest request)
         => CreateActionResult(await productService.UpdateStockAsync(request));

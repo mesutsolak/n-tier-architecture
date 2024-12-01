@@ -16,6 +16,7 @@ global using Services.Categories.Create;
 global using Services.Categories.Dto;
 global using Services.Categories.Update;
 global using Services.ExceptionHandlers;
+global using Services.Filters;
 global using Services.Products;
 global using Services.Products.Create;
 global using Services.Products.Update;
