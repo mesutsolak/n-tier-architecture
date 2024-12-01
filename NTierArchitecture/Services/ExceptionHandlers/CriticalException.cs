@@ -1,6 +1,5 @@
-﻿namespace Services.ExceptionHandlers
+﻿namespace Services.ExceptionHandlers;
+
+public class CriticalException(string message) : Exception(message)
 {
-    public class CriticalException(string message) : Exception(message)
-    {
-    }
 }

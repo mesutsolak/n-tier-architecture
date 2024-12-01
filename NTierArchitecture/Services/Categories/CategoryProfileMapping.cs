@@ -1,6 +1,4 @@
-﻿using Services.Categories.Dto;
-
-namespace Services.Categories;
+﻿namespace Services.Categories;
 
 public class CategoryProfileMapping : Profile
 {
