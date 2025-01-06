@@ -7,14 +7,14 @@ This project is designed based on the classic n-tier architecture approach and c
 
 To get the application up and running, the appropriate .NET 8 SDK version must be installed, and a suitable database should be created using migrations.
 
-## Versions
+## Dependencies
 
-| Name                                 | Version     |
-|--------------------------------------|-------------|
-| AutoMapper                           | 13.0.1      |
-| FluentValidation.AspNetCore          | 11.3.0      |
-| Microsoft.EntityFrameworkCore        | 8.0.0       |
-| Microsoft.EntityFrameworkCore.Design | 8.0.0       |
-| Microsoft.EntityFrameworkCore.SqlServer | 8.0.0    |
-| Microsoft.EntityFrameworkCore.Tools | 8.0.0       |
-| Swashbuckle.AspNetCore               | 6.6.2       |
+| Name                                 | Category           | Version     |
+|--------------------------------------|--------------------|-------------|
+| AutoMapper                           | Mapping            | 13.0.1      |
+| FluentValidation.AspNetCore          | Validation         | 11.3.0      |
+| Microsoft.EntityFrameworkCore        | ORM                | 8.0.0       |
+| Microsoft.EntityFrameworkCore.Design | ORM                | 8.0.0       |
+| Microsoft.EntityFrameworkCore.SqlServer | ORM              | 8.0.0       |
+| Microsoft.EntityFrameworkCore.Tools  | ORM                | 8.0.0       |
+| Swashbuckle.AspNetCore               | API Documentation  | 6.6.2       |
